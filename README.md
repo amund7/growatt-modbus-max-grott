@@ -13,16 +13,16 @@ Then I tried the RS485 modbus ports with a RS485 USB interface in the raspberry.
 This solution turned out rock solid! It has been running for I think a year now, pushing all data points every second.
 
 
-amund@solarpi:~ $ python3 getconfig.py 
+```amund@solarpi:~ $ python3 getconfig.py ```
 
 to keep it running after you log out
 
-amund@solarpi:~ $ nohup python3 growatt-x000ES-main/getstatus.py > /dev/null &
+```amund@solarpi:~ $ nohup python3 growatt-x000ES-main/getstatus.py > /dev/null &```
 
 
 Still this solution relies on the HACS add-on https://github.com/muppet3000/homeassistant-grott to scale and recieve the data, set up and update the Home Assistant sensors. I may move away from this in the future, since this solution limits the number and naming of the sensors. I have added a few extra ones directly in Home Assistant, and while my HA config will be messy, it would be straight forward to move all sensors:
 
-mqtt:
+```mqtt:
   sensor:
     - name: "QMH6CGB003 Derating mode"
       state_topic: "energy/growatt"
@@ -48,13 +48,13 @@ mqtt:
       state_class: measurement
       unit_of_measurement : "%"   
       value_template: "{{ value_json['values']['realpowerpercent'] }}"
-
+```
 
 
 
 Also, to get the text for the derating mode I've added:
 
-template:
+```template:
   - sensor:
       - unique_id: derating_text
         name: Derating text
@@ -71,7 +71,7 @@ template:
         {% elif derate == 9 %}{{derate}}: OverBack ByTime
         {%- endif %}"
 
-
+```
 
 
 
