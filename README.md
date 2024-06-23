@@ -2,6 +2,9 @@
 
 Based on https://github.com/sdsolomo/growatt-x000ES
 
+This Python program polls data via modbus from a Growatt MAX inverter and sends it to MQTT in a format recognized by the homeassistant-grott Home Assistant plugin.
+
+
 At first I used the Growatt WIFI dongle to send directly to Growatt servers. The default update rate was every 5 minutes. I managed to adjust it down to 1 minute, which is also very slow to see much of what's going on when there are clouds, or just any weather really.
 
 I used a Home Assistant plugin that would poll the Growatt server. Usually every morning that would stop working. It could work again after some fiddling like restarting the plugin. The developers of the plugin said this is because of rate limitations set by Growatt, or something of that sort. So I tried GROTT in several configurations, that worked better, but also had issues. But the biggest was I could never get past the 1 minute data rate.
