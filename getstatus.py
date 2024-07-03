@@ -345,12 +345,21 @@ while True:
             if message != None:
                 # Parse the JSON string
                 data = json.loads(message)
-                # Extract the value associated with the key "dust"
-                value = data.get("activepower")
-                print("Set power limit ", value)
+                
+                if "activepower" in data:
+                    value = data.get("activepower")
+                    print("Set power limit ", value)
 
-                row = growatt.client.write_register(3, value)
-                print(row)
+                    row = growatt.client.write_register(3, value)
+                    print(row)
+
+                if "curveanalysis" in data:
+                    value = data.get("curveanalysis")
+                    print("Curve analysis ", value)
+
+                    
+                    row = growatt.client.write_register(250, value)
+                    print(row)
 
                 message=None
 
