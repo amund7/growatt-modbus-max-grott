@@ -322,6 +322,9 @@ print("Done!")
 
 
 while True:
+
+    start_time = time.time()
+
     for inverter in inverters:
         growatt = inverter['growatt']
         #print(growatt.name)
@@ -374,4 +377,13 @@ while True:
             if verbose: print("ERRORHERE1")
             print(err)
 
-        time.sleep(interval)
+    # Calculate time until the next full second
+    next_second = (start_time // 1) + 1
+    delay = next_second - time.time()
+    
+    print("Wait ", delay)
+    # Delay until the start of the next full second
+    if delay > 0:
+        time.sleep(delay)
+
+    #time.sleep(interval)
